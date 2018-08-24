@@ -23,3 +23,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/dashboard', 'AdminController@dashboard');
 
 Route::get('/logout', 'AdminController@logout');
+
+Route::get('/admin/driver_info', 'DriverinfoController@index');
+
+Route::get('/admin/drivers', 'DrivershowController@index');
+
+Route::get('/admin/daily_distance', 'DailydistanceController@index');
+
+Route::get('/admin/coupons', 'CouponController@index');
+

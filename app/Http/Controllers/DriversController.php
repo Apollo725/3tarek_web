@@ -20,13 +20,12 @@ class DriversController extends Controller
         $car_mode = $request->input('car_mode');
         $password = $request->input('password');
         $token = sha1(time());
-        
-        $email_duplication = DB::select('select id from drivers where email = ?', [$email]);
+        $auth_duplication = DB::select('select id from drivers where email = ? or phone_num = ?', [$email, $phone_num]);
 
-        if ($email_duplication) {
+        if ($auth_duplication) {
             return response()->json([
                 'status' => '0',
-                'message' => 'Email Duplicated'
+                'message' => 'Auth Duplicated'
             ]);
         } else {
             $register_result = DB::insert('insert into drivers(user_name, first_name, last_name, photo_url, phone_num, email, birthday, gender, address, car_mode, password, remember_token) values(?,?,?,?,?,?,?,?,?,?,?,?)', 
@@ -44,7 +43,6 @@ class DriversController extends Controller
                 ]);
             }
         }
-        
     }
 
     public function login(Request $request) {
